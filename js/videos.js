@@ -22,6 +22,20 @@ const displayVideos = (videos) => {
     // console.log(videos)
     const videosContainer = document.getElementById('videos-container')
     videosContainer.innerHTML = "";
+
+
+    if (videos.length == 0) {
+        videosContainer.classList.remove('grid')
+        videosContainer.innerHTML = `
+        <div class="flex justify-center items-center min-h-[350px]">
+        <img src="../assets/Icon.png"
+        </div>
+        
+        `;
+    }else{
+        videosContainer.classList.add('grid')
+
+    }
     videos.forEach(video => {
         // console.log(video)
         const card = document.createElement('div');
