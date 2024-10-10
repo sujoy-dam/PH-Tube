@@ -5,6 +5,11 @@ function calculateTime(time) {
     const remainingRestSecond = minutes % 60;
     return `${hour}hr ${minutes}m ${remainingRestSecond}s ago`
 }
+const activeRemove =()=>{
+    const buttons= document.getElementsByClassName('category-btn')
+    for(let btn of buttons)
+        btn.classList.remove('bg-red-500')
+}
 
 
 const loadVideos = () => {
@@ -14,8 +19,14 @@ const loadVideos = () => {
 }
 function selectCategoryVideos(id) {
     fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
-        .then(res => res.json())
-        .then(data => displayVideos(data.category))
+    .then(res => res.json())
+    .then(data => {
+        activeRemove()
+        const activeBtn = document.getElementById(`btn-${id}`);
+            console.log(activeBtn)
+            activeBtn.classList.add('bg-red-500')
+            displayVideos(data.category)
+        })
         .catch((error) => console.log(error))
 }
 const displayVideos = (videos) => {
@@ -27,8 +38,9 @@ const displayVideos = (videos) => {
     if (videos.length == 0) {
         videosContainer.classList.remove('grid')
         videosContainer.innerHTML = `
-        <div class="flex justify-center items-center min-h-[350px]">
-        <img src="../assets/Icon.png"
+        <div class="flex justify-center flex-col items-center min-h-[330px]">
+            <img src="../assets/Icon.png">
+            <h1 class="text-5xl text-gray-600 font-bold">No Content Here in this Category</h1>
         </div>
         
         `;

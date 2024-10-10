@@ -17,7 +17,7 @@ const displayCategories = (categories) => {
         const buttonContainer = document.createElement('div')
         // buttonContainer.classList ='btn text-xl font-medium';
         buttonContainer.innerHTML = `
-            <button onclick="selectCategoryVideos(${category.category_id})" class="btn">
+            <button id="btn-${category.category_id}" onclick="selectCategoryVideos(${category.category_id})" class="btn category-btn">
                 ${category.category}
             </button>
         `
